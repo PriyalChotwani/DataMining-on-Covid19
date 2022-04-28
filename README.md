@@ -17,6 +17,11 @@ The data is pre-cleaned and does not require much manipulation but to predict th
 2. Create 3 tables for confirmed, recovered and death cases respectively for analysis using Microsoft Pivot Table.
 3. Import all the 3 CSV files to Jupyter Notebook
 
+```
+# Data Manipulation to create new columns for date and time in ENIGMA)JHU
+enigma_jhud['date'] = pd.to_datetime(enigma_jhud['last_update']).dt.date
+enigma_jhud['Time'] = pd.to_datetime(enigma_jhud['last_update']).dt.time
+```
 ### Analysis
 1. Calculate the total number of confirmed cases, death cases and recovered cases.
 <p align="center">
@@ -61,6 +66,15 @@ Linear Regression is a linear model – i.e., that assumes a linear relationship
  <img src= "Images/LR.png">
 </p>
 
+```
+# Using Linear regression model to make predictions
+linear_model = LinearRegression(normalize=True, fit_intercept=True)
+linear_model.fit(X_train_confirmed, y_train_confirmed)
+test_linear_pred = linear_model.predict(X_test_confirmed)
+linear_pred = linear_model.predict(future_forecast)
+print('MAE:', mean_absolute_error(test_linear_pred, y_test_confirmed))
+print('MSE:',mean_squared_error(test_linear_pred, y_test_confirmed))
+```
 As seen from the graph, even though, the graph follows linear relationship, but after the 45th day mark, cases suddenly start to increase breaking the linear relationship. Although, the model fits perfectly for the initial 20 days, and for the next 10 days with error tolerance, a polynomial or exponential model will better fit this data. Therefore, to better fit the graph, it is important to take a polynomial or exponential model such as SVM, to reflect the increase in cases. 
 
 2. Support Vector Machine
@@ -74,6 +88,19 @@ This model has 4 major parameters which are the following:
 - Gama: This parameter determines how much influence a single training example has. If Gama is large, other examples are affected.
 - Epsilon: It is the margin of tolerance where no penalty is given to errors. The samples are penalized when the predictions are wrong. If Epsilon is         large, there will be large error tolerance.
 
+```
+# Building the SVM model
+kernel = ['poly', 'sigmoid', 'rbf']
+c = [0.01, 0.1, 1, 10]
+gamma = [0.01, 0.1, 1]
+epsilon = [0.01, 0.1, 1]
+shrinking = [True, False]
+svm_grid = {'kernel': kernel, 'C': c, 'gamma' : gamma, 'epsilon': epsilon, 'shrinking' : shrinking}
+
+svm = SVR()
+svm_search = RandomizedSearchCV(svm, svm_grid, scoring='neg_mean_squared_error', cv=3, return_train_score=True, n_jobs=-1, n_iter=40, verbose=1)
+svm_search.fit(X_train_confirmed, y_train_confirmed)
+```
 The best parameters are calculated using the best parameter function and suing it on the training data which comes to be as C =10, Epsilon = 1, Gama = 0.01 and Kernel = ‘Poly’.
 
 <p align="center">
