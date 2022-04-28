@@ -40,3 +40,22 @@ Even though there is a separate graph for the number of deaths, the aim of this 
 1. Linear Regression
 
 Linear Regression is a linear model – i.e., that assumes a linear relationship between the input and the output variable. In this case, the input variable is date, and the output variable is number of cases, therefore, with this relation, the number of cases can be predicted using days. Using simple linear regression between input and output, which is date and number of cases, a predictive model can be built. First step is to import Linear Regression from SKLEARN linear model library, then next step is to fit X train and Y train confirmed cases to this model. Predict function is used where days is an input variable to predict the number of cases. The following graph is plotted for the next 10 days using matplotlib:
+
+As seen from the graph, even though, the graph follows linear relationship, but after the 45th day mark, cases suddenly start to increase breaking the linear relationship. Although, the model fits perfectly for the initial 20 days, and for the next 10 days with error tolerance, a polynomial or exponential model will better fit this data. Therefore, to better fit the graph, it is important to take a polynomial or exponential model such as SVM, to reflect the increase in cases. 
+
+2. Support Vector Machine
+
+SVM are a set of supervised learning methods used for regression and classification problems. The model is majorly implemented for classification problems, but in this single output data, the SVM model can be used as regression model to predict the number of cases if the number of days is altered.
+There are different attributes and variables that can be adjusted in this model that can result in the prediction of better results, but for this analysis, a simple SVM with polynomial function will be used. 
+
+This model has 4 major parameters which are the following:
+- Kernel: Stands for the type of regression. Can be linear, polynomial, rbf, sigmoid and more.
+- C: Stands for the miscalculation of training example against the simplicity of the decision surface. Meaning if C is low, the decision surface is smooth   and if C is high, model aims at predicting training examples correctly.
+- Gama: This parameter determines how much influence a single training example has. If Gama is large, other examples are affected.
+- Epsilon: It is the margin of tolerance where no penalty is given to errors. The samples are penalized when the predictions are wrong. If Epsilon is         large, there will be large error tolerance.
+
+The best parameters are calculated using the best parameter function and suing it on the training data which comes to be as C =10, Epsilon = 1, Gama = 0.01 and Kernel = ‘Poly’.
+
+As shown in the figure, SVM model fits better than the linear model as the number of cases suddenly take an exponential increase after the 47th day. Although, this might produce high error percentage in the later days of prediction.
+
+
