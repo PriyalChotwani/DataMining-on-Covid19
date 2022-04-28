@@ -58,4 +58,17 @@ The best parameters are calculated using the best parameter function and suing i
 
 As shown in the figure, SVM model fits better than the linear model as the number of cases suddenly take an exponential increase after the 47th day. Although, this might produce high error percentage in the later days of prediction.
 
+# Results
+Both models were successfully able to predict the cases. As SVM was built using the polynomial function, the model was able to fit the data but still at the mark of 47th day, the cases started to rise exponentially. This phenomenon can increase error percentage during the last sample of predictions. Linear Regression on the other hand predicted the cases linearly and as seen in the graph, it has a large error percentage in the cases.
+
+The statistical information is valuable and necessary to determine the performance of model. Mean absolute error is a measure of error between paired observations. Mean squared error is the mean squared deviation that tells us the average of squares of errors. Coefficient of determination is the proportion of the variation in the dependent variable that is predictable from the independent variable. Intercept is point where the function crosses the y-axis.
+
+Statistical information of Linear Regression model is as follows:
+
+Statistical information of SVM model is as follows:
+
+# Conclusion
+This analysis can be used to replicate the number of cases in the coming COVID waves and similar trends can be identified early on so that government and people can take necessary action to prevent the spreading.
+
+According to the research, SVM Model fits better to the data in comparison to Linear Regression. Even though, according to both these models the data points increase exponentially, but still there is higher mean absolute error as the models could not match the extremity of a real-time situation of a pandemic which increased exponentially. In this case the average percentage difference is 17% for SVM model, but new models can be tested and trained to further improve the predictions and lower the error rates.
 
